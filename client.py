@@ -1,14 +1,15 @@
 import socket
 
-host = socket.gethostname()
-port = 5555
+TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
+MESSAGE = "Hello, World!"
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((host, port))
-s.sendall(b'Hello wolrd')
-data = s.recv(1024)
+s.connect((TCP_IP, TCP_PORT))
+
+s.send(MESSAGE)
+data = s.recv(BUFFER_SIZE)
 s.close()
-print('Received', repr(data))
 
-
-
-print(str(host))
+print "received data:", data
