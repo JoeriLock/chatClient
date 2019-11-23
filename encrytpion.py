@@ -1,0 +1,3 @@
+
+def encrypt():
+    return "hello"
