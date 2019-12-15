@@ -1,8 +1,8 @@
 import random
 
 # two random primes
-p = 2
-q = 7
+p = 7686544500740926489
+q = 10367748245344531429
 # mod i use to dycrpt
 n = p*q
 # my public key
@@ -11,8 +11,22 @@ e = 0
 d = 0
 
 
+def __init__(self):
+    e = getPublicKey(p,q)
+    d = getPrivateKey(getCoPrimesFromPrimes(p,q))
+    print(e)
+    print(d)
+
+
+# ord(char) < mod
+def chyperChar(char, key, mod):
+    numVal = ord(char)**key % mod
+    return chr(numVal)
+
+
 def getPrivateKey(phiN):
     return (phiN * random.randint(0, 1000)) - 1
+
 
 def getPublicKey(p,q):
     eList = getCommenCoPrimes(p*q)
@@ -20,6 +34,7 @@ def getPublicKey(p,q):
     return random.choice(eList)
 
 
+# gets the amount of posible co primes
 def getCoPrimesFromPrimes(a, b):
     return (a-1)*(b-1)
 
