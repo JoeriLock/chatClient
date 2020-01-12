@@ -18,15 +18,22 @@ class Encryption:
         self.n = p*q  # Mod
         self.phiN = self.getPhiOf(p, q)
         self.pub = self.getPublicKey(p, q)
-        self.private = self.getPrivateKey(self.phiN)
+        self.private = self.getPrivateKey(self.pub,self.phiN)
 
-    def getPrivateKey(self, phiN):
-        d = (phiN * random.randint(1, 3)) - 1
-        if ((self.pub*d) % phiN != 1):
-            print('private key check went wrong')
-        return d
+    def getPrivateKey(self, a, b):
+        orinalB = b
+        x, prevX = 0, 1
+        y, prevY = 1, 0
+        while (b != 0):
+            q = a // b
+            a, b = b, a % b
+            x, prevX = prevX - q * x, x
+            y, prevY = prevY - q * y, y
+        if prevX < 0:
+            return orinalB + prevX
+        else:
+            return prevX
 
-    #  Probaly goes wrong
     def getPublicKey(self, p, q):
         eList = self.getCommenCoPrimes(p*q)
         eList.remove(1)
@@ -37,7 +44,6 @@ class Encryption:
         return (a-1)*(b-1)
 
     def getCoPrimes(self, n):
-        print('--- corpimes of ' + str(n) + '---')
         numbers = list(range(2, n))
         for i in numbers[:]:  # not sure what [:] does
             if n % i == 0:
@@ -45,7 +51,6 @@ class Encryption:
                     numbers[ii-2] = 0  # there we be some numbers be getting removed twice
         numbers = list(set(numbers))  # filter duplicates
         numbers.remove(0)
-        print(numbers)
         return [1] + numbers
 
     # get Commen co primes from n and phi(n)
