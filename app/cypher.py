@@ -8,11 +8,19 @@ d = 11
 
 class Cypher:
 
-    # ord(char) < mod
-    def chyperChar(self, char, key, mod):
-        numVal = ord(char)**key % mod
-        return chr(numVal)
+    def chyperString(self, plain, key, mod):
+        cypherList = []
+        for c in plain:
+            cypherList.append(self.chyperVal(ord(c), key, mod))
+        return cypherList
 
-    def cypherNum(self, num, key, mod):
+    def deChyperList(self, list, key, mod):
+        cypher = ""
+        for i in list:
+            cypher += chr(self.chyperVal(i, key, mod))
+        return cypher
+
+
+    def chyperVal(self, num, key, mod):
         numVal = num**key % mod
         return numVal
