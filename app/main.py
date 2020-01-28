@@ -2,7 +2,7 @@ from cypher import Cypher
 from encryption import Encryption
 
 print('---enc---')
-enc = Encryption(79, 41)
+enc = Encryption(79, 11)
 
 print("Pub:" + str(enc.pub))
 print("Priv:" + str(enc.private))
@@ -10,9 +10,10 @@ print("mod:" + str(enc.n))
 print("phiN:" + str(enc.phiN))
 
 print('---text---')
-text = 2
+text = 'ik ben joeri'
 c = Cypher()
-crypt = c.cypherNum(text, enc.pub, enc.n)
+crypt = c.chyperString(text, enc.pub, enc.n)
 print("plain:" + str(text))
-print("encrypt:" + str(crypt))
-print("decrypt:" + str(c.cypherNum(crypt, enc.private, enc.n)))
+print("encrypt:")
+print(crypt)
+print("decrypt:" + str(c.deChyperList(crypt, enc.private, enc.n)))
