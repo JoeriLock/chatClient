@@ -24,9 +24,14 @@ class Client:
     def connect(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((self.host, self.port))
-        self.s.sendall('need key'.encode())
-        data = self.s.recv(1024)
-        self.s.close()
-        print('Received', repr(data))
+        if not self.isKeySet:
+            self.s.sendall('need key'.encode())
+            data = self.s.recv(1024).decode()
+            self.s.close()
+            keys = data.split(',')
+            self.cypher = Cypher(keys[0],keys[1])
+            self.isKeySet = True
+
+
 
 client = Client("127.0.0.1",5005)

@@ -43,8 +43,6 @@ class Server:
                 if not data:
                     break
 
-                print ("client says:")
-                print(data.decode())
                 if(data.decode() == 'need key'):
                     print('Gonna send key to client')
                     self.sendMessage(str(self.pubKey)+","+str(self.cypher.mod),conn)
