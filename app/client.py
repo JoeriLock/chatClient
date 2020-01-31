@@ -24,7 +24,7 @@ class Client:
     def connect(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((self.host, self.port))
-        self.s.sendall('need key')
+        self.s.sendall('need key'.encode())
         data = self.s.recv(1024)
         self.s.close()
         print('Received', repr(data))
