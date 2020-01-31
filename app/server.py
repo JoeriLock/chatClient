@@ -19,20 +19,25 @@ class Server:
         self.s.listen(1)
         conn, addr = self.s.accept()
         print('Conected by', addr)
-        while True:
-            try:
-                data = conn.recv(1024)
-                if not data:
-                    break
+        self.sendMessage("123",conn)
 
-                print ("client says:")
-                print(data)
-                conn.sendall("server says:hi".encode())
-
-            except socket.error:
-                print("Error Occured.")
-                break
+        # while True:
+        #     try:
+        #         data = conn.recv(1024)
+        #         if not data:
+        #             break
+        #
+        #         print ("client says:")
+        #         print(data)
+        #         self.sendMessage("server says:hi", conn)
+        #
+        #     except socket.error:
+        #         print("Error Occured.")
+        #         break
 
         conn.close()
+
+    def sendMessage(self,msg,conn):
+        conn.sendall(msg.encode())
 
 server = Server('127.0.0.1',5005)
