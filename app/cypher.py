@@ -1,26 +1,24 @@
-p = 2
-q = 7
-n = p*q
-phiN = (p-1)*(q-1)
-e = 5
-d = 11
-
-
 class Cypher:
 
-    def chyperString(self, plain, key, mod):
+    key = ""
+    mod = ""
+    def __init__(self,key,mod):
+        self.key = key
+        self.mod = mod
+
+    def chyperString(self, plain):
         cypherList = []
         for c in plain:
-            cypherList.append(self.chyperVal(ord(c), key, mod))
+            cypherList.append(self.chyperVal(ord(c)))
         return cypherList
 
-    def deChyperList(self, list, key, mod):
+    def deChyperList(self, list):
         cypher = ""
         for i in list:
-            cypher += chr(self.chyperVal(i, key, mod))
+            cypher += chr(self.chyperVal(i))
         return cypher
 
 
-    def chyperVal(self, num, key, mod):
-        numVal = num**key % mod
+    def chyperVal(self, num):
+        numVal = num**self.key % self.mod
         return numVal
