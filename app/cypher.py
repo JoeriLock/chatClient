@@ -3,8 +3,8 @@ class Cypher:
     key = ""
     mod = ""
     def __init__(self,key,mod):
-        self.key = key
-        self.mod = mod
+        self.key = int(key)
+        self.mod = int(mod)
 
     def chyperString(self, plain):
         cypherList = []
