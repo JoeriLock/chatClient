@@ -1,6 +1,8 @@
 import socket
 import sys
 from cypher import Cypher
+import time
+
 
 class Client:
 
@@ -14,7 +16,18 @@ class Client:
         self.host = host
         self.port = port
         self.cypher = self.getKey()
+
         self.connect()
+
+    def startConversation(self):
+        while True:
+            msg = input(":")
+            if msg == 'exit':
+                break
+            enc = self.cypher.chyperString(msg)
+            print(enc)
+            self.s.sendall(enc.encode())
+
 
     def getKey(self):
         if(len(sys.argv) > 2):
@@ -27,11 +40,12 @@ class Client:
         if not self.isKeySet:
             self.s.sendall('need key'.encode())
             data = self.s.recv(1024).decode()
-            self.s.close()
             keys = data.split(',')
             self.cypher = Cypher(keys[0],keys[1])
             self.isKeySet = True
-
+            print(keys)
+            self.startConversation()
+        self.s.close();
 
 
 client = Client("127.0.0.1",5005)
