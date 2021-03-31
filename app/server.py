@@ -41,6 +41,7 @@ class Server:
         conn, addr = self.s.accept()
         print('Conected by', addr)
 
+
         while True:
             try:
                 data = conn.recv(1024).decode()

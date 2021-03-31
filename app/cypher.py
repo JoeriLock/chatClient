@@ -6,11 +6,13 @@ class Cypher:
         self.key = int(key)
         self.mod = int(mod)
 
+
+
     def chyperString(self, plain):
-        cypherList = []
+        cypherString = ""
         for c in plain:
-            cypherList.append(self.chyperVal(ord(c)))
-        return cypherList
+            cypherString += str(self.chyperVal(ord(c)))+","
+        return cypherString[:-1]
 
     def deChyperList(self, list):
         cypher = ""
@@ -20,5 +22,5 @@ class Cypher:
 
 
     def chyperVal(self, num):
-        numVal = num**self.key % self.mod
+        numVal = int(num)**self.key % self.mod
         return numVal

@@ -6,8 +6,8 @@ import time
 
 class Client:
 
-    host = ""
-    port = ""
+    host = "127.0.0.1"
+    port = "5005"
     s = ""
     isKeySet = True
     pubKeyFile = './pubkey.txt'
@@ -31,7 +31,7 @@ class Client:
 
     def getKey(self):
         if(len(sys.argv) > 2):
-            return Cypher(sys.argv[1],sys.arv[2])
+            return Cypher(sys.argv[1],sys.argv[2])
         self.isKeySet = False
 
     def connect(self):
@@ -44,7 +44,7 @@ class Client:
             self.cypher = Cypher(keys[0],keys[1])
             self.isKeySet = True
             print(keys)
-            self.startConversation()
+        self.startConversation()
         self.s.close();
 
 
